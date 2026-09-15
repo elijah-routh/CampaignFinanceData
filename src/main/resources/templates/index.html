@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Campaign Finance Intelligence</title>
+</head>
+
+<body>
+
+<h1>Campaign Finance Intelligence</h1>
+
+<form action="/search" method="get">
+
+    <label for="name">Candidate</label>
+
+    <input
+            id="name"
+            type="text"
+            name="name"
+            th:value="${searchName}">
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+
+<div th:if="${candidates != null}">
+
+    <h2>Results</h2>
+
+    <p th:if="${#lists.isEmpty(candidates)}">
+        No candidates found.
+    </p>
+
+    <table th:unless="${#lists.isEmpty(candidates)}">
+
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Party</th>
+            <th>Office</th>
+            <th>State</th>
+            <th>FEC ID</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="candidate : ${candidates}">
+
+            <td th:text="${candidate.name}"></td>
+            <td th:text="${candidate.party}"></td>
+            <td th:text="${candidate.office}"></td>
+            <td th:text="${candidate.state}"></td>
+            <td th:text="${candidate.candidateId}"></td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>
