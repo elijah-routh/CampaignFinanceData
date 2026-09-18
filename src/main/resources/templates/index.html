@@ -66,5 +66,59 @@
 
 </div>
 
+<form action="/searchCommittees" method="get">
+
+    <label for="name">Committee</label>
+
+    <input
+            id="name"
+            type="text"
+            name="name"
+            th:value="${searchCommittees}">
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+<div th:if="${committees != null}">
+
+    <h2>Results</h2>
+
+    <p th:if="${#lists.isEmpty(committees)}">
+        No committees found.
+    </p>
+
+    <table th:unless="${#lists.isEmpty(committees)}">
+
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Party</th>
+            <th>Org. Type</th>
+            <th>Comm. Type</th>
+            <th>State</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="committee : ${committees}">
+
+            <td th:text="${committee.name}"></td>
+            <td th:text="${committee.party}"></td>
+            <td th:text="${committee.organization}"></td>
+            <td th:text="${committee.committeeType}"></td>
+            <td th:text="${committee.state}"></td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
 </body>
 </html>

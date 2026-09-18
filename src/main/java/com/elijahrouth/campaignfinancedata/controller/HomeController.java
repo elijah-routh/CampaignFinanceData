@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.elijahrouth.campaignfinancedata.service.FecService;
 import com.elijahrouth.campaignfinancedata.model.FecCandidate;
+import com.elijahrouth.campaignfinancedata.model.FecCommittee;
+
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -18,7 +20,7 @@ public class HomeController {
         this.fecService = fecService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/") // allows url to automatically find the matching controller method
     public String home() {
         return "index";
     }
@@ -30,6 +32,17 @@ public class HomeController {
 
         model.addAttribute("candidates", candidates);
         model.addAttribute("searchName", name);
+
+        return "index";
+    }
+
+    @GetMapping("/searchCommittees")
+    public String searchCommittees(@RequestParam String name, Model model) {
+        List<FecCommittee> committees =
+            fecService.searchCommittees(name);
+
+        model.addAttribute("committees", committees);
+        model.addAttribute("searchCommittees", name);
 
         return "index";
     }

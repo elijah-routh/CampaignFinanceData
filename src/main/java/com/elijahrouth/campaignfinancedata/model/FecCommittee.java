@@ -2,18 +2,18 @@ package com.elijahrouth.campaignfinancedata.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record FecCandidate (
-    
-    @JsonProperty("candidate_id") //jackson is converting the JSON into Java
-    String candidateId,
+public record FecCommittee (
 
     String name,
 
     @JsonProperty("party_full")
     String party,
 
-    @JsonProperty("office_full")
-    String office,
+    @JsonProperty("organization_type_full")
+    String organization,
+
+    @JsonProperty("committee_type_full")
+    String committeeType,
 
     String state
 ) {}
