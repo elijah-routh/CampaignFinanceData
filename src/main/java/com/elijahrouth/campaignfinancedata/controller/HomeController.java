@@ -2,6 +2,7 @@ package com.elijahrouth.campaignfinancedata.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.elijahrouth.campaignfinancedata.service.FecService;
 import com.elijahrouth.campaignfinancedata.model.FecCandidate;
@@ -45,5 +46,14 @@ public class HomeController {
         model.addAttribute("searchCommittees", name);
 
         return "index";
+    }
+
+    @GetMapping("/candidates/{id}")
+    public String candidateDashboard(@PathVariable String id, Model model) {
+        FecCandidate candidate = fecService.getCandidate(id);
+
+        model.addAttribute("candidate", candidate);
+        
+        return "dashboard";
     }
 }

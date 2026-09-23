@@ -44,6 +44,26 @@ public class FecService {
         return response.results();
     }
 
+    public FecCandidate getCandidate(String candidateId) {
+
+        FecCandidateResponse response = restClient
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/candidate/{candidateId}/")
+                        .queryParam("api_key", apiKey)
+                        .build(candidateId))
+                .retrieve()
+                .body(FecCandidateResponse.class);
+
+        if (response == null
+                || response.results() == null
+                || response.results().isEmpty()) {
+            return null;
+        }
+
+        return response.results().getFirst();
+    }
+
     public List<FecCommittee> searchCommittees (String name) {
         FecCommitteeResponse response = restClient
                 .get()
